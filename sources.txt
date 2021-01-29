@@ -1,0 +1,29 @@
+
+Filtre Canva (Sepia...)
+https://www.guyom-design.com/blog/demos/html/effets-img-canvas/
+
+Crop and Resize
+https://stackoverflow.com/questions/26015497/how-to-resize-then-crop-an-image-with-canvas
+https://openclassrooms.com/forum/sujet/canvas-recadrer-une-image-71752
+https://stackoverflow.com/questions/19262141/resize-image-with-javascript-canvas-smoothly
+https://www.w3schools.com/graphics/tryit.asp?filename=trycanvas_image
+https://tympanus.net/codrops/2014/10/30/resizing-cropping-images-canvas/
+https://openclassrooms.com/fr/courses/4810241-utilisez-html5-pour-linterface-utilisateur/4979216-utilisez-la-balise-canvas
+
+Canvas Doc
+https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/drawImage
+
+Fill
+
+FillStyle Transparent
+https://stackoverflow.com/questions/7460927/canvas-fillstyle-in-interval-with-transparent-opacity
+
+Canvas border
+https://stackoverflow.com/questions/38173871/html5-canvas-how-to-border-a-fillrect
+http://www.java2s.com/Tutorials/Javascript/Canvas/Shape/Draw_a_rectangle_with_border_and_fill_on_HTNL5_Canvas_in_JavaScript.htm
+http://tutorials.jenkov.com/html5-canvas/stroke-fill.html
+
+Upload image
+https://www.webtrickshome.com/faq/how-to-display-uploaded-image-in-html-using-javascript
+https://stackoverflow.com/questions/18457340/how-to-preview-selected-image-in-input-type-file-in-popup-using-jquery
+https://www.codegrepper.com/code-examples/html/input+type%3D%22file%22+and+display+image

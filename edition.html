@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-4.5.3-dist\css\bootstrap.css">
+    <title>Edition</title>
+</head>
+<body class="container-fluid bg-light vh-100">
+    <div class="container h-100 d-flex flex-column px-0">
+        <div class="py-3">
+            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+            <label for="file" class="btn btn-secondary mb-0">Upload Image</label>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-secondary">Filters</button>
+                <button type="button" class="btn btn-outline-secondary">Resize</button>
+                <button type="button" class="btn btn-outline-secondary">Crop</button>
+            </div>
+        </div>
+        <div class="flex-grow-1 pb-3">
+            <div class="h-100 p-3 bg-white shadow-sm d-flex align-items-center">
+                <div class="d-flex justify-content-center">
+                    <img class="img-fluid" id="output">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var img = new Image();
+
+        img.onload = function () {
+
+            // set size proportional to image
+            canvas.height = canvas.width * (img.height / img.width);
+
+            // step 1 - resize to 50%
+            var oc = document.createElement('canvas'),
+                octx = oc.getContext('2d');
+
+            oc.width = img.width * 0.5;
+            oc.height = img.height * 0.5;
+            octx.drawImage(img, 0, 0, oc.width, oc.height);
+
+            // step 2
+            octx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5);
+
+            // step 3, resize to final size
+            ctx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5,
+            0, 0, canvas.width, canvas.height);
+        }
+
+        img.src = "alexandre-brondino-VRTK2ef38DE-unsplash.jpg";
+    </script> -->
+
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+</html>
