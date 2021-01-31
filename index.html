@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap-4.5.3-dist\css\bootstrap.css">
+    <link rel="stylesheet" href="style.css">
     <title>Edition</title>
 </head>
 <body class="container-fluid bg-light vh-100">
@@ -20,40 +21,11 @@
         <div class="flex-grow-1 pb-3">
             <div class="h-100 p-3 bg-white shadow-sm d-flex align-items-center">
                 <div class="d-flex justify-content-center">
-                    <img class="img-fluid" id="output">
+                    <img id="output">
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- <script>
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-        var img = new Image();
-
-        img.onload = function () {
-
-            // set size proportional to image
-            canvas.height = canvas.width * (img.height / img.width);
-
-            // step 1 - resize to 50%
-            var oc = document.createElement('canvas'),
-                octx = oc.getContext('2d');
-
-            oc.width = img.width * 0.5;
-            oc.height = img.height * 0.5;
-            octx.drawImage(img, 0, 0, oc.width, oc.height);
-
-            // step 2
-            octx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5);
-
-            // step 3, resize to final size
-            ctx.drawImage(oc, 0, 0, oc.width * 0.5, oc.height * 0.5,
-            0, 0, canvas.width, canvas.height);
-        }
-
-        img.src = "alexandre-brondino-VRTK2ef38DE-unsplash.jpg";
-    </script> -->
 
     <script>
         var loadFile = function(event) {
