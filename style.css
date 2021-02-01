@@ -2,6 +2,10 @@ body {
     min-width: 334px;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 @media screen and (min-width: 992px) {
 
     canvas {
@@ -9,7 +13,6 @@ body {
         width: 100%;
         object-fit: contain;
     }
-
 }
 
 @media screen and (max-width: 992px) {
