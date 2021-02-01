@@ -10,29 +10,46 @@
 <body class="container-fluid bg-light vh-100">
     <div class="container h-100 d-flex flex-column px-0">
         <div class="py-3">
-            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
+            <input type="file" accept="image/*" name="image" id="file" style="display: none;">
             <label for="file" class="btn btn-secondary mb-0">Upload Image</label>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-outline-secondary">Filters</button>
-                <button type="button" class="btn btn-outline-secondary">Resize</button>
-                <button type="button" class="btn btn-outline-secondary">Crop</button>
-            </div>
+            <button type="button" class="btn btn-dark">Download Image</button>
         </div>
         <div class="flex-grow-1 pb-3">
-            <div class="h-100 p-3 bg-white shadow-sm d-flex align-items-center">
-                <div class="d-flex justify-content-center">
-                    <img id="output">
-                </div>
+            <div class="d-flex flex-column flex-lg-row h-100">
+                <side class="flex-shrink-1 col-lg-4 px-0 pr-lg-3 pb-3 pb-lg-0 d-flex flex-column">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" id="general">
+                            <a class="nav-link active" href="#">General</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Filter</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Resize</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Crop</a>
+                        </li>
+                    </ul>
+                    <div class="border border-top-0 flex-grow-1 bg-white p-3">
+                        <div id="general">
+                            <div class="form-group">
+                                <label for="fileName">File name</label>
+                                <input type="text" class="form-control" id="fileName">
+                            </div>
+                        </div>
+                    </div>
+                </side>
+                <section class="col-lg-8 h-100 bg-white border">
+                    <picture class="h-100 d-flex align-items-center justify-content-center" id="picture">
+                        <canvas id="canvas">
+                            canvas non supporté par ce navigateur
+                        </canvas>
+                    </picture>
+                </section>
             </div>
         </div>
     </div>
-
-    <script>
-        var loadFile = function(event) {
-            var image = document.getElementById('output');
-            image.src = URL.createObjectURL(event.target.files[0]);
-        };
-    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
@@ -42,5 +59,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

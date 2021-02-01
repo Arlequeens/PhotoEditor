@@ -1,5 +1,26 @@
-img {
-    height: calc(100vh - 118px);
-    width: 100%;
-    object-fit: contain;
+body {
+    min-width: 334px;
+}
+
+@media screen and (min-width: 992px) {
+
+    canvas {
+        height: calc(100vh - 118px);
+        width: 100%;
+        object-fit: contain;
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+
+    side {
+        height: 200px;
+    }
+
+    canvas {
+        height: calc(100vh - 318px);
+        width: 100%;
+        object-fit: contain;
+    }
 }
