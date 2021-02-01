@@ -13,6 +13,9 @@ https://openclassrooms.com/fr/courses/4810241-utilisez-html5-pour-linterface-uti
 Canvas Doc
 https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/drawImage
 
+Tutoriel Canvas
+https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutoriel_canvas
+
 Fill
 
 FillStyle Transparent
@@ -27,3 +30,9 @@ Upload image
 https://www.webtrickshome.com/faq/how-to-display-uploaded-image-in-html-using-javascript
 https://stackoverflow.com/questions/18457340/how-to-preview-selected-image-in-input-type-file-in-popup-using-jquery
 https://www.codegrepper.com/code-examples/html/input+type%3D%22file%22+and+display+image
+
+DownLoad image
+https://nosmoking.developpez.com/demos/js/canvas-download.html
+https://stackoverflow.com/questions/11112321/how-to-save-canvas-as-png-image/20633822
+https://stackoverflow.com/questions/8126623/downloading-canvas-element-to-an-image
+https://jsfiddle.net/user2314737/28wqq1gu/
