@@ -9,10 +9,10 @@ $(document).ready(function () {
         image.onload = function(){
 
             // Initialise le recadrage
-            sessionStorage.setItem("sx", "0");
-            sessionStorage.setItem("sy", "0");
-            sessionStorage.setItem("sWidth", image.width);
-            sessionStorage.setItem("sHeight", image.height);
+            sessionStorage.setItem("sx", image.width / 4);
+            sessionStorage.setItem("sy", image.height / 4);
+            sessionStorage.setItem("sWidth", image.width / 2);
+            sessionStorage.setItem("sHeight", image.height / 2);
             sessionStorage.setItem("filtre", "aucun");
 
             // Rendre actif l'onglet général
