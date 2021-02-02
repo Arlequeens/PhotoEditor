@@ -6,13 +6,7 @@ body {
     cursor: pointer;
 }
 
-canvas {
-    height: 100%;
-    width: 100%;
-    border: 1px dashed black;
-}
-
-/* @media screen and (min-width: 992px) {
+@media screen and (min-width: 992px) {
 
     canvas {
         height: calc(100vh - 118px);
@@ -32,4 +26,4 @@ canvas {
         width: 100%;
         object-fit: contain;
     }
-} */
+}
