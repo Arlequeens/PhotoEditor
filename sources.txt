@@ -10,6 +10,9 @@ https://www.w3schools.com/graphics/tryit.asp?filename=trycanvas_image
 https://tympanus.net/codrops/2014/10/30/resizing-cropping-images-canvas/
 https://openclassrooms.com/fr/courses/4810241-utilisez-html5-pour-linterface-utilisateur/4979216-utilisez-la-balise-canvas
 
+CROP
+https://stackoverflow.com/questions/28538913/crop-an-image-displayed-in-a-canvas/28540766
+
 Canvas Doc
 https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/drawImage
 
@@ -36,3 +39,29 @@ https://nosmoking.developpez.com/demos/js/canvas-download.html
 https://stackoverflow.com/questions/11112321/how-to-save-canvas-as-png-image/20633822
 https://stackoverflow.com/questions/8126623/downloading-canvas-element-to-an-image
 https://jsfiddle.net/user2314737/28wqq1gu/
+
+Mouse move
+https://stackoverflow.com/questions/34483940/best-way-to-run-mousemove-only-on-mousedown-with-pure-javascript
+https://developer.mozilla.org/fr/docs/Web/API/Element/mousemove_event
+https://developer.mozilla.org/en-US/docs/Web/API/Element/mousemove_event
+
+Click envent on canvas
+https://stackoverflow.com/questions/9880279/how-do-i-add-a-simple-onclick-event-handler-to-a-canvas-element
+https://stackoverflow.com/questions/16628184/add-onclick-and-onmouseover-to-canvas-element
+
+Change cursor on canvas shape
+https://stackoverflow.com/questions/31495344/change-cursor-depending-on-section-of-canvas
+
+Change cursor
+https://stackoverflow.com/questions/4564251/change-the-mouse-pointer-using-javascript
+
+Move image inside a canvas
+https://stackoverflow.com/questions/21945241/move-image-inside-html-canvas-with-mouse-dragging
+
+Position DIV relative to another DIV
+https://stackoverflow.com/questions/11143273/position-div-relative-to-another-div
+https://www.tutorialspoint.com/how-to-set-div-position-relative-to-another-div-in-javascript
+https://www.tutorialrepublic.com/faq/how-to-overlay-one-div-over-another-div-using-css.php
+
+How do I get the coordinates of a mouse click on a canvas element
+https://stackoverflow.com/questions/55677/how-do-i-get-the-coordinates-of-a-mouse-click-on-a-canvas-element
