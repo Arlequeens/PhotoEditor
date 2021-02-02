@@ -13,6 +13,8 @@ $(document).ready(function () {
             sessionStorage.setItem("sy", image.height / 4);
             sessionStorage.setItem("sWidth", image.width / 2);
             sessionStorage.setItem("sHeight", image.height / 2);
+            sessionStorage.setItem("dWidth", image.width);
+            sessionStorage.setItem("dHeight", image.height);
             sessionStorage.setItem("filtre", "aucun");
 
             // Rendre actif l'onglet général
@@ -31,6 +33,9 @@ $(document).ready(function () {
             // Initialise l'onglet resize
             document.getElementById('width').value = image.width;
             document.getElementById('height').value = image.height;
+
+            // Masquer l'input type range
+            $("#intensity").addClass("d-none");
         }
     });
 
@@ -45,7 +50,7 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, image.width, image.height);
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
     });
 
     // Affiche le panel des filtres
@@ -60,7 +65,7 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, image.width, image.height);
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
     });
 
     // Affiche le panel pour le redimensionnement de l'image
@@ -72,7 +77,7 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, image.width, image.height);
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
     });
 
     // Affiche le panel pour le recadrage de l'image
@@ -84,10 +89,10 @@ $(document).ready(function () {
 
         // Affichage du recadrage
         var image = document.getElementById("image");
-        var sx = sessionStorage.getItem("sx", "500");
-        var sy = sessionStorage.getItem("sy", "500");
-        var sWidth = sessionStorage.getItem("sWidth", "2000");
-        var sHeight = sessionStorage.getItem("sHeight", "1500");
+        var sx = sessionStorage.getItem("sx");
+        var sy = sessionStorage.getItem("sy");
+        var sWidth = sessionStorage.getItem("sWidth");
+        var sHeight = sessionStorage.getItem("sHeight");
         displayImageCropping(image, image.width, image.height, sx, sy, sWidth, sHeight);
     });
 
@@ -130,7 +135,7 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, image.width, image.height);
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
     });
 
     $("#sepia").click(function () {
@@ -149,7 +154,7 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, image.width, image.height);
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
     });
 
     $("#greyscale").click(function () {
@@ -168,13 +173,25 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, image.width, image.height);
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
+    });
+
+    // Changement d'intensité du filtre
+    $("#intensity").change(function () {
+        var newIntensity = $("#intensity").val();
+        sessionStorage.setItem("intensity", newIntensity);
+
+        // Affichage de l'image
+        var image = document.getElementById("image");
+        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
     });
 
     // Redimensionnement de l'image
     $("#width, #height").change(function () {
         var image = document.getElementById("image");
         displayImage(image, $("#width").val(), $("#height").val());
+        sessionStorage.setItem("dWidth", $("#width").val());
+        sessionStorage.setItem("dHeight", $("#height").val());
     });
 });
 
