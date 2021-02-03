@@ -18,11 +18,11 @@ body {
 @media screen and (max-width: 992px) {
 
     side {
-        height: 200px;
+        height: 215px;
     }
 
     canvas {
-        height: calc(100vh - 326px);
+        height: calc(100vh - 341px);
         width: 100%;
         object-fit: contain;
     }

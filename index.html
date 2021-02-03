@@ -13,14 +13,13 @@
         <div class="py-3">
             <input type="file" accept="image/*" name="image" id="file" style="display: none;">
             <label for="file" class="btn btn-secondary mb-0">Upload Image</label>
-            <button type="button" class="btn btn-dark" id="download">Download Image</button>
         </div>
         <div class="flex-grow-1 pb-3">
             <div class="d-flex flex-column flex-lg-row h-100">
                 <side class="flex-shrink-1 col-lg-4 px-0 pr-lg-3 pb-3 pb-lg-0 d-flex flex-column">
                     <ul class="nav nav-tabs">
                         <li class="nav-item" id="general">
-                            <a class="nav-link active" href="#">General</a>
+                            <a class="nav-link active" href="#">File</a>
                         </li>
                         <li class="nav-item" id="filter">
                             <a class="nav-link" href="#">Filter</a>
@@ -40,6 +39,9 @@
                                     <input type="text" class="form-control" id="fileName">
                                 </div>
                             </form>
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-success" id="download">Download</button>
+                            </div>
                         </div>
                         <div id="filterPanel" class="d-none">
                             <div class="row">
@@ -104,6 +106,7 @@
                                     </div>
                                   </div>
                             </form>
+                            <p class="pl-1"><small class="text-muted font-weight-light" id="warningResize"></small></p>
                         </div>
                     </div>
                 </side>

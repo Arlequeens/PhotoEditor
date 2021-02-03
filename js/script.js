@@ -57,6 +57,7 @@ $(document).ready(function () {
             // Initialise l'onglet crop
             $('#nocrop').addClass("border-secondary");
             $('#zoom').removeClass(" border-secondary");
+            $("#warningResize").html("max size : " + sWidth + " x " + sHeight);
 
             // Masquer l'input type range
             $("#intensity").addClass("d-none");
@@ -169,14 +170,12 @@ $(document).ready(function () {
     // Redimensionnement de l'image (resize)
     $("#width").change(function () {
         var tempWidth = $("#width").val();
-        var tempHeight = Math.floor(tempWidth / ratio);
-        if(tempWidth <= sWidth && tempHeight <= sHeight) {
+        if(tempWidth <= sWidth) {
             dWidth = tempWidth;
-            dHeight = tempHeight;
+            dHeight = Math.floor(tempWidth / ratio);
             $("#height").val(dHeight);
         }
         else {
-            alert("Valeur trop grande");
             $("#width").val(dWidth);
         }
         var image = document.getElementById("image");
@@ -184,14 +183,12 @@ $(document).ready(function () {
     });
     $("#height").change(function () {
         var tempHeight = $("#height").val();
-        var tempWidth = Math.floor(tempHeight * ratio);
-        if(tempWidth <= sWidth && tempHeight <= sHeight) {
-            dWidth = tempWidth;
+        if(tempHeight <= sHeight) {
             dHeight = tempHeight;
+            dWidth = Math.floor(tempHeight * ratio);
             $("#width").val(dWidth);
         }
         else {
-            alert("Valeur trop grande");
             $("#height").val(dHeight);
         }
         var image = document.getElementById("image");
@@ -226,6 +223,7 @@ $(document).ready(function () {
         // Maj de l'onglet resize
         document.getElementById('width').value = dWidth;
         document.getElementById('height').value = dHeight;
+        $("#warningResize").html("max size : " + sWidth + " x " + sHeight);
 
         // Affichage du recadrage
         displayImageCropping(image, sx, sy, sWidth, sHeight, filter, intensity);
@@ -245,6 +243,7 @@ $(document).ready(function () {
         // Maj de l'onglet resize
         document.getElementById('width').value = dWidth;
         document.getElementById('height').value = dHeight;
+        $("#warningResize").html("max size : " + sWidth + " x " + sHeight);
 
         // Affichage du recadrage
         displayImageCropping(image, sx, sy, sWidth, sHeight, filter, intensity);
