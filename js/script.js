@@ -1,5 +1,20 @@
 $(document).ready(function () {
 
+    // Variable de filtre
+    var filter = "";
+    var intensity = 1;
+
+    // Variable de redimensionnement (resize)
+    var dWidth;
+    var dHeight;
+    var ratio;
+
+    // Variable de recadrage (crop)
+    var sx;
+    var sy;
+    var sWidth;
+    var sHeight;
+
     // Upload de l'image
     $("#file").change(function(event) {
         var srcImage = URL.createObjectURL(event.target.files[0]);
@@ -8,14 +23,27 @@ $(document).ready(function () {
 
         image.onload = function(){
 
-            // Initialise le recadrage
-            sessionStorage.setItem("sx", image.width / 4);
-            sessionStorage.setItem("sy", image.height / 4);
-            sessionStorage.setItem("sWidth", image.width / 2);
-            sessionStorage.setItem("sHeight", image.height / 2);
-            sessionStorage.setItem("dWidth", image.width);
-            sessionStorage.setItem("dHeight", image.height);
-            sessionStorage.setItem("filtre", "aucun");
+            // Initialise le filtre
+            filter = "aucun";
+
+            // Initialise le recadrage (crop)
+            sx = 0;
+            sy = 0;
+            sWidth = image.width;
+            sHeight = image.height;
+            // sx = image.width / 4;
+            // sy = image.height / 4;
+            // sWidth = image.width / 2;
+            // sHeight = image.height / 2;
+            // sx = 0;
+            // sy = 0;
+            // sWidth = 200;
+            // sHeight = 100;
+
+            // Initialise le redimensionnement
+            dWidth = sWidth;
+            dHeight = sHeight;
+            ratio = image.width / image.height;
 
             // Rendre actif l'onglet général
             $("#general").find(".nav-link").addClass("active");
@@ -24,22 +52,20 @@ $(document).ready(function () {
             $("#generalPanel").siblings().addClass("d-none");
 
             // Affiche l'image
-            displayImage(image, image.width, image.height);
+            displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
 
             // Initialise l'onglet general
             var srcImage = document.getElementById('file').value;
             document.getElementById('fileName').value = getFileName(srcImage);
 
             // Initialise l'onglet resize
-            document.getElementById('width').value = image.width;
-            document.getElementById('height').value = image.height;
+            document.getElementById('width').value = dWidth;
+            document.getElementById('height').value = dHeight;
 
             // Masquer l'input type range
             $("#intensity").addClass("d-none");
         }
     });
-
-    ///// Séléction de l'onglet, affichage du panel d'outils et affichage de l'image
 
     // Affiche le panel général pour le renommage du fichier
     $("#general").click(function () {
@@ -50,7 +76,7 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
     });
 
     // Affiche le panel des filtres
@@ -61,14 +87,78 @@ $(document).ready(function () {
         $("#filterPanel").siblings().addClass("d-none");
 
         // Rendre actif le bouton du filtre courant
-        setActiveCurrentFilterBtn();
+        setActiveCurrentFilterBtn(filter);
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
     });
 
-    // Affiche le panel pour le redimensionnement de l'image
+    // Choix du filtre (filter)
+    $("#aucun").click(function () {
+
+        // Rendre actif le bouton
+        $("#aucun").addClass("border-secondary");
+        $("#aucun").parent().siblings().find(".card").removeClass("border-secondary");
+
+        // Maj du filtre
+        filter = "aucun";
+        intensity = 0;
+
+        // Masquer l'input type range
+        $("#intensity").addClass("d-none");
+
+        // Affichage de l'image
+        var image = document.getElementById("image");
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+    $("#sepia").click(function () {
+        
+        // Rendre actif le bouton
+        $("#sepia").addClass("border-secondary");
+        $("#sepia").parent().siblings().find(".card").removeClass("border-secondary");
+
+        // Maj du filtre
+        filter = "sepia";
+        intensity = 1;
+
+        // Afficher l'input type range
+        $("#intensity").removeClass("d-none");
+        $("#intensity").val(intensity);
+
+        // Affichage de l'image
+        var image = document.getElementById("image");
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+    $("#greyscale").click(function () {
+
+        // Rendre actif le bouton
+        $("#greyscale").addClass("border-secondary");
+        $("#greyscale").parent().siblings().find(".card").removeClass("border-secondary");
+
+        // Maj du filtre
+        filter = "greyscale";
+        intensity = 1;
+
+        // Afficher l'input type range
+        $("#intensity").removeClass("d-none");
+        $("#intensity").val(intensity);
+
+        // Affichage de l'image
+        var image = document.getElementById("image");
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+
+    // Changement d'intensité du filtre
+    $("#intensity").change(function () {
+        intensity = $("#intensity").val();
+
+        // Affichage de l'image
+        var image = document.getElementById("image");
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+
+    // Affiche le panel pour le redimensionnement de l'image (resize)
     $("#resize").click(function () {
         $(this).find(".nav-link").addClass("active");
         $(this).siblings().find(".nav-link").removeClass("active");
@@ -77,10 +167,42 @@ $(document).ready(function () {
 
         // Affichage de l'image
         var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
     });
 
-    // Affiche le panel pour le recadrage de l'image
+    // Redimensionnement de l'image (resize)
+    $("#width").change(function () {
+        var tempWidth = $("#width").val();
+        var tempHeight = Math.floor(tempWidth / ratio);
+        if(tempWidth <= sWidth && tempHeight <= sHeight) {
+            dWidth = tempWidth;
+            dHeight = tempHeight;
+            $("#height").val(dHeight);
+        }
+        else {
+            alert("Valeur trop grande");
+            $("#width").val(dWidth);
+        }
+        var image = document.getElementById("image");
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+    $("#height").change(function () {
+        var tempHeight = $("#height").val();
+        var tempWidth = Math.floor(tempHeight * ratio);
+        if(tempWidth <= sWidth && tempHeight <= sHeight) {
+            dWidth = tempWidth;
+            dHeight = tempHeight;
+            $("#width").val(dWidth);
+        }
+        else {
+            alert("Valeur trop grande");
+            $("#height").val(dHeight);
+        }
+        var image = document.getElementById("image");
+        displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+
+    // Affiche le panel pour le recadrage de l'image (crop)
     $("#crop").click(function () {
         $(this).find(".nav-link").addClass("active");
         $(this).siblings().find(".nav-link").removeClass("active");
@@ -89,14 +211,22 @@ $(document).ready(function () {
 
         // Affichage du recadrage
         var image = document.getElementById("image");
-        var sx = sessionStorage.getItem("sx");
-        var sy = sessionStorage.getItem("sy");
-        var sWidth = sessionStorage.getItem("sWidth");
-        var sHeight = sessionStorage.getItem("sHeight");
-        displayImageCropping(image, image.width, image.height, sx, sy, sWidth, sHeight);
+        // displayImageCropping(image, image.width, image.height, sx, sy, sWidth, sHeight, filter, intensity);
+        // displayImageCropping(image, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
+        displayImage(image, image.width, image.height, 0, 0, dWidth, dWidth, filter, intensity);
+        // displayImage(image, width, height);
+        var canvas = document.getElementById('canvas');
+        ctx = canvas.getContext('2d');
+
+        // Ajout d'un voile sombre sur l'image
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
+        ctx.fillRect(0, 0, image.width, image.height);
+
+        // Affichage de l'image recadrée
+        ctx.drawImage(image, sx, sy, sWidth, sHeight, sx, sy, sWidth, sHeight);
     });
 
-    // Téléchargement de l'image du canvas
+    // Téléchargement de l'image du canvas (download)
     $("#download").click(function () {
 
         // création d'un lien html temporaire
@@ -117,85 +247,9 @@ $(document).ready(function () {
         // suppression de l'élément devenu inutile
         document.body.removeChild(lien);
     });
-
-    ///// Choix du filtre
-
-    $("#aucun").click(function () {
-
-        // Rendre actif le bouton
-        $("#aucun").addClass("border-secondary");
-        $("#aucun").parent().siblings().find(".card").removeClass("border-secondary");
-
-        // Maj du filtre dans le session storage
-        sessionStorage.setItem("filtre", "aucun");
-        sessionStorage.setItem("intensity", "0");
-
-        // Masquer l'input type range
-        $("#intensity").addClass("d-none");
-
-        // Affichage de l'image
-        var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
-    });
-
-    $("#sepia").click(function () {
-        
-        // Rendre actif le bouton
-        $("#sepia").addClass("border-secondary");
-        $("#sepia").parent().siblings().find(".card").removeClass("border-secondary");
-
-        // Maj du filtre dans le session storage
-        sessionStorage.setItem("filtre", "sepia");
-        sessionStorage.setItem("intensity", "1");
-
-        // Afficher l'input type range
-        $("#intensity").removeClass("d-none");
-        $("#intensity").val(sessionStorage.getItem("intensity"));
-
-        // Affichage de l'image
-        var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
-    });
-
-    $("#greyscale").click(function () {
-
-        // Rendre actif le bouton
-        $("#greyscale").addClass("border-secondary");
-        $("#greyscale").parent().siblings().find(".card").removeClass("border-secondary");
-
-        // Maj du filtre dans le session storage
-        sessionStorage.setItem("filtre", "greyscale");
-        sessionStorage.setItem("intensity", "1");
-
-        // Afficher l'input type range
-        $("#intensity").removeClass("d-none");
-        $("#intensity").val(sessionStorage.getItem("intensity"));
-
-        // Affichage de l'image
-        var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
-    });
-
-    // Changement d'intensité du filtre
-    $("#intensity").change(function () {
-        var newIntensity = $("#intensity").val();
-        sessionStorage.setItem("intensity", newIntensity);
-
-        // Affichage de l'image
-        var image = document.getElementById("image");
-        displayImage(image, sessionStorage.getItem("dWidth"), sessionStorage.getItem("dHeight"));
-    });
-
-    // Redimensionnement de l'image
-    $("#width, #height").change(function () {
-        var image = document.getElementById("image");
-        displayImage(image, $("#width").val(), $("#height").val());
-        sessionStorage.setItem("dWidth", $("#width").val());
-        sessionStorage.setItem("dHeight", $("#height").val());
-    });
 });
 
-function displayImage(image, width, height) {
+function displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity) {
 
     // Creation du canvas
     var canvas = document.createElement('canvas');
@@ -208,18 +262,19 @@ function displayImage(image, width, height) {
 
     // Affichage de l'image dans le canvas
     if (canvas.getContext){
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = dWidth;
+        canvas.height = dHeight;
         ctx = canvas.getContext('2d');
-        setFilter(ctx, sessionStorage.getItem("filtre"), sessionStorage.getItem("intensity"));
-        ctx.drawImage(image, 0, 0, width, height);
+        setFilter(ctx, filter, intensity);
+        ctx.drawImage(image, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
     } else {
         alert('canvas non supporté par ce navigateur');
     }
 }
 
-function displayImageCropping(image, width, height, sx, sy, sWidth, sHeight) {
-    displayImage(image, width, height);
+function displayImageCropping(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity) {
+    displayImage(image, dWidth, dHeight, 0, 0, dWidth, dWidth, filter, intensity);
+    // displayImage(image, width, height);
     var canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
@@ -250,8 +305,8 @@ function getFileName(srcImage) {
 }
 
 // Rendre actif le bouton du filtre courant
-function setActiveCurrentFilterBtn() {
-    switch (sessionStorage.getItem("filtre")) {
+function setActiveCurrentFilterBtn(filter) {
+    switch (filter) {
         case 'aucun':
             $("#aucun").addClass("border-secondary");
             $("#aucun").parent().siblings().find(".card").removeClass("border-secondary");
