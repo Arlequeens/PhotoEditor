@@ -180,6 +180,7 @@ $(document).ready(function () {
         }
         var image = document.getElementById("image");
         displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+        $("#width").blur(); 
     });
     $("#height").change(function () {
         var tempHeight = $("#height").val();
@@ -193,6 +194,7 @@ $(document).ready(function () {
         }
         var image = document.getElementById("image");
         displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity);
+        $("#height").blur(); 
     });
 
     // Affiche le panel pour le recadrage de l'image (crop)
