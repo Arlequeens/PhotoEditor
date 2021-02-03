@@ -1,0 +1,1 @@
+To access to the homepage, please open "index.html"

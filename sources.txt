@@ -19,8 +19,6 @@ https://developer.mozilla.org/fr/docs/Web/API/CanvasRenderingContext2D/drawImage
 Tutoriel Canvas
 https://developer.mozilla.org/fr/docs/Web/API/Canvas_API/Tutoriel_canvas
 
-Fill
-
 FillStyle Transparent
 https://stackoverflow.com/questions/7460927/canvas-fillstyle-in-interval-with-transparent-opacity
 
