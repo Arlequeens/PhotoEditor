@@ -25,11 +25,11 @@
                         <li class="nav-item" id="filter">
                             <a class="nav-link" href="#">Filter</a>
                         </li>
-                        <li class="nav-item" id="resize">
-                            <a class="nav-link" href="#">Resize</a>
-                        </li>
                         <li class="nav-item" id="crop">
                             <a class="nav-link" href="#">Crop</a>
+                        </li>
+                        <li class="nav-item" id="resize">
+                            <a class="nav-link" href="#">Resize</a>
                         </li>
                     </ul>
                     <div class="border border-top-0 flex-grow-1 bg-white p-3">
@@ -73,6 +73,24 @@
                                 </form>
                             </div>
                         </div>
+                        <div id="cropPanel" class="d-none">
+                            <div class="row">
+                                <div class="col-4 pr-1">
+                                    <div class="card cursor-pointer border-secondary" id="nocrop">
+                                        <div class="card-body px-1 rounded">
+                                            <p class="card-title mb-0 text-center">Aucun</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 px-1">
+                                    <div class="card cursor-pointer" id="zoom">
+                                        <div class="card-body px-1 rounded">
+                                            <p class="card-title mb-0 text-center">Zoom 50%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="resizePanel" class="d-none">
                             <form>
                                 <div class="form-row">
@@ -87,7 +105,6 @@
                                   </div>
                             </form>
                         </div>
-                        <div id="cropPanel" class="d-none">Work in progress</div>
                     </div>
                 </side>
                 <section class="col-lg-8 h-100 bg-white border d-flex align-items-center justify-content-center py-3">

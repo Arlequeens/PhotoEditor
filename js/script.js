@@ -31,14 +31,6 @@ $(document).ready(function () {
             sy = 0;
             sWidth = image.width;
             sHeight = image.height;
-            // sx = image.width / 4;
-            // sy = image.height / 4;
-            // sWidth = image.width / 2;
-            // sHeight = image.height / 2;
-            // sx = 0;
-            // sy = 0;
-            // sWidth = 200;
-            // sHeight = 100;
 
             // Initialise le redimensionnement
             dWidth = sWidth;
@@ -61,6 +53,10 @@ $(document).ready(function () {
             // Initialise l'onglet resize
             document.getElementById('width').value = dWidth;
             document.getElementById('height').value = dHeight;
+
+            // Initialise l'onglet crop
+            $('#nocrop').addClass("border-secondary");
+            $('#zoom').removeClass(" border-secondary");
 
             // Masquer l'input type range
             $("#intensity").addClass("d-none");
@@ -211,19 +207,47 @@ $(document).ready(function () {
 
         // Affichage du recadrage
         var image = document.getElementById("image");
-        // displayImageCropping(image, image.width, image.height, sx, sy, sWidth, sHeight, filter, intensity);
-        // displayImageCropping(image, sx, sy, sWidth, sHeight, 0, 0, dWidth, dHeight);
-        displayImage(image, image.width, image.height, 0, 0, dWidth, dWidth, filter, intensity);
-        // displayImage(image, width, height);
-        var canvas = document.getElementById('canvas');
-        ctx = canvas.getContext('2d');
+        displayImageCropping(image, sx, sy, sWidth, sHeight, filter, intensity);
+    });
 
-        // Ajout d'un voile sombre sur l'image
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-        ctx.fillRect(0, 0, image.width, image.height);
+    // Choix du recadrage
+    $("#nocrop").click(function () {
+        $('#nocrop').addClass("border-secondary");
+        $('#zoom').removeClass(" border-secondary");
 
-        // Affichage de l'image recadrée
-        ctx.drawImage(image, sx, sy, sWidth, sHeight, sx, sy, sWidth, sHeight);
+        var image = document.getElementById("image");
+        sx = 0;
+        sy = 0;
+        sWidth = image.width;
+        sHeight = image.height;
+        dWidth = sWidth;
+        dHeight = sHeight;
+
+        // Maj de l'onglet resize
+        document.getElementById('width').value = dWidth;
+        document.getElementById('height').value = dHeight;
+
+        // Affichage du recadrage
+        displayImageCropping(image, sx, sy, sWidth, sHeight, filter, intensity);
+    });
+    $("#zoom").click(function () {
+        $('#nocrop').removeClass("border-secondary");
+        $('#zoom').addClass(" border-secondary");
+
+        var image = document.getElementById("image");
+        sx = image.width / 4;
+        sy = image.height / 4;
+        sWidth = image.width / 2;
+        sHeight = image.height / 2;
+        dWidth = sWidth;
+        dHeight = sHeight;
+
+        // Maj de l'onglet resize
+        document.getElementById('width').value = dWidth;
+        document.getElementById('height').value = dHeight;
+
+        // Affichage du recadrage
+        displayImageCropping(image, sx, sy, sWidth, sHeight, filter, intensity);
     });
 
     // Téléchargement de l'image du canvas (download)
@@ -272,15 +296,14 @@ function displayImage(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, i
     }
 }
 
-function displayImageCropping(image, dWidth, dHeight, sx, sy, sWidth, sHeight, filter, intensity) {
-    displayImage(image, dWidth, dHeight, 0, 0, dWidth, dWidth, filter, intensity);
-    // displayImage(image, width, height);
+function displayImageCropping(image, sx, sy, sWidth, sHeight, filter, intensity) {
+    displayImage(image, image.width, image.height, 0, 0, image.width, image.height, filter, intensity);
     var canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
     // Ajout d'un voile sombre sur l'image
     ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, image.width, image.height);
 
     // Affichage de l'image recadrée
     ctx.drawImage(image, sx, sy, sWidth, sHeight, sx, sy, sWidth, sHeight);
